@@ -195,4 +195,3 @@ elif choice == "⚙️ വഴിപാട് ലിസ്റ്റ് ക്ര�
         if add_btn and new_vazhipadu_name:
             conn = get_db_connection()
             cursor = conn.cursor()
-            try:

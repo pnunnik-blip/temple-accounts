@@ -34,7 +34,7 @@ def init_db():
     """)
     default_vazhipadus = [
         ("അർച്ചന", 20.0), ("പുഷ്പാഞ്ജലി", 30.0), ("നെയ്‌വിളക്ക്", 50.0), 
-        ("ഗണပതി ഹോമം", 150.0), ("പാല്പായസം", 100.0)
+        ("ഗണപതി ഹോമം", 150.0), ("പാല്പായസം", 100.0)
     ]
     for name, amt in default_vazhipadus:
         try:
@@ -106,7 +106,7 @@ elif choice == "💰 വരവുകൾ (Income)":
     
     init_name, init_star, init_house, init_phone = "", "", "", ""
     if selected_name_option != "-- പുതിയ ഭക്തൻ (New Devotee) --":
-        matched_user = devotees_df[devotees_df["devotee_name"] == selected_name_option].iloc[0]
+        matched_user = devotees_df[devotees_df["devotee_name"] == selected_name_option].iloc
         init_name = matched_user["devotee_name"]
         init_star = matched_user["star"]
         init_house = matched_user["house_name"]
@@ -125,7 +125,7 @@ elif choice == "💰 വരവുകൾ (Income)":
             
             calculated_amt = 0.0
             for item in selected_vazhipadus:
-                calculated_amt += float(vazhipadu_df[vazhipadu_df["name"] == item]["default_amount"].values[0])
+                calculated_amt += float(vazhipadu_df[vazhipadu_df["name"] == item]["default_amount"].values)
             
             name = st.text_input("പേര് *", value=init_name)
             star = st.text_input("നക്ഷത്രം", value=init_star)
@@ -196,4 +196,3 @@ elif choice == "⚙️ വഴിപാട് ലിസ്റ്റ് ക്ര�
             conn = get_db_connection()
             cursor = conn.cursor()
             try:
-                cursor.execute("INSERT INTO vazhipadu_master (name, default_amount) VALUES (?, ?)", (new_vazhipadu_name, new_vazhipadu_amount))

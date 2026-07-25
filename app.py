@@ -6,7 +6,7 @@ from datetime import datetime
 st.set_page_config(page_title="Govindapuram Temple Accounts", page_icon="🛕", layout="wide")
 
 # Title of the Application
-st.title("🛕 ഗോവിന്ദപുരം ശ്രീകൃഷ്ണ ക്ഷേത്രം - Accounts App")
+st.title("🛕 ഗോവിന്ദപുരം ശ്രീകൃഷ്ണ ക്ഷേത്രം - Accounts Apps")
 st.markdown("---")
 
 # 1. Dummy Data Initialization (Replace with your Google Sheet connection if needed)

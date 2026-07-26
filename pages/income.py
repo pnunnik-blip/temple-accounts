@@ -1,5 +1,4 @@
 import streamlit as st
-from datetime import datetime
 
 from sheets import (
     get_vazhipadu_master,
@@ -40,7 +39,7 @@ def show():
 
 
     # -----------------------------
-    # Prepare display data
+    # Prepare Data
     # -----------------------------
 
     active_vazhipadu = {
@@ -65,59 +64,65 @@ def show():
 
 
     # -----------------------------
-    # Income Form
+    # Devotee Details
     # -----------------------------
 
-    with st.form("income_form"):
+    name = st.text_input(
+        "പേര് (Devotee Name)"
+    )
 
 
-        name = st.text_input(
-            "പേര് (Devotee Name)"
-        )
-
-
-        star = st.text_input(
-            "നക്ഷത്രം (Star)"
-        )
-
-
-        selected_items = st.multiselect(
-
-            "വഴിപാടുകൾ തിരഞ്ഞെടുക്കുക",
-
-            list(active_vazhipadu.keys())
-
-        )
-
-
-        total = 0
-
-
-        items = []
-
-
-        for item in selected_items:
-
-
-            amount = active_vazhipadu[item]
-
-
-            total += amount
-
-
-            items.append({
-
-                "name":item,
-
-                "amount":amount
-
-            })
+    star = st.text_input(
+        "നക്ഷത്രം (Star)"
+    )
 
 
 
-        st.info(
-            f"ആകെ തുക (Total): ₹ {total}"
-        )
+    # -----------------------------
+    # LIVE Vazhipadu Selection
+    # -----------------------------
+
+    selected_items = st.multiselect(
+
+        "വഴിപാടുകൾ തിരഞ്ഞെടുക്കുക",
+
+        list(active_vazhipadu.keys())
+
+    )
+
+
+    total = 0
+
+    items = []
+
+
+    for item in selected_items:
+
+        amount = active_vazhipadu[item]
+
+        total += amount
+
+        items.append({
+
+            "name": item,
+
+            "amount": amount
+
+        })
+
+
+    # This updates immediately
+    st.info(
+        f"ആകെ തുക (Total): ₹ {total}"
+    )
+
+
+
+    # -----------------------------
+    # Save Section
+    # -----------------------------
+
+    with st.form("income_save_form"):
 
 
         payment_mode = st.selectbox(
@@ -132,7 +137,6 @@ def show():
         remarks = st.text_input(
             "Remarks"
         )
-
 
 
         submit = st.form_submit_button(
@@ -153,7 +157,7 @@ def show():
                 return
 
 
-            if len(items)==0:
+            if len(items) == 0:
 
                 st.error(
                     "Please select Vazhipadu"
@@ -165,28 +169,26 @@ def show():
 
             data = {
 
+                "name": name,
 
-                "name":name,
+                "star": star,
 
-                "star":star,
+                "total_amount": total,
 
-                "total_amount":total,
+                "payment_mode": payment_mode,
 
-                "payment_mode":payment_mode,
+                "remarks": remarks,
 
-                "remarks":remarks,
-
-                "items":items
+                "items": items
 
             }
-
 
 
             response = save_income(data)
 
 
 
-            if response.get("status")=="success":
+            if response.get("status") == "success":
 
 
                 st.success(
@@ -199,8 +201,10 @@ def show():
             else:
 
                 st.error(
+
                     response.get(
                         "message",
                         "Save failed"
                     )
+
                 )

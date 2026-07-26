@@ -1,9 +1,11 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+from database import create_tables
 
 # Set up page configurations
 st.set_page_config(page_title="Govindapuram Temple Accounts", page_icon="🛕", layout="wide")
+create_tables()
 
 # Title of the Application
 st.title("🛕 ഗോവിന്ദപുരം ശ്രീകൃഷ്ണ ക്ഷേത്രം - Accounts App")

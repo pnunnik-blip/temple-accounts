@@ -98,3 +98,25 @@ def get_vazhipadu_master():
     return call_api(
         "get_vazhipadu"
     )
+    
+
+# ============================================
+# Payment Master
+# ============================================
+
+def get_payment_master():
+
+    return call_api(
+        "get_payment_master"
+    )
+
+
+# ============================================
+# Expense Master
+# ============================================
+
+def get_expense_master():
+
+    return call_api(
+        "get_expense_master"
+    )
